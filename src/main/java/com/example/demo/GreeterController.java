@@ -34,6 +34,9 @@ public class GreeterController {
     @Value("${MESSAGE_PREFIX:Hi}")
     private String prefix;
 
+    @Value("${spring.application.name}")
+    private String appName;
+
     /**
      * Counter to help us see the lifecycle
      */
@@ -63,12 +66,12 @@ public class GreeterController {
         return "OK";
     }
 
-    @GetMapping("/Awesomefeature")
+    @GetMapping("/awesomefeature")
     public String awesomeFeature(){
         UnleashConfig config = UnleashConfig.builder()
-                .appName("java-test")
-                .instanceId("instance x")
-                .unleashAPI("http://unleash.herokuapp.com/api/")
+                .appName(appName)
+                .instanceId(appName+"-instance")
+                .unleashAPI("http://unleash-server:4242/api/")
                 .build();
         Unleash unleash = new DefaultUnleash(config);
         if(unleash.isEnabled("AwesomeFeature")) {
