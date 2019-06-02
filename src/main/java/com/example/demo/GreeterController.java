@@ -1,6 +1,9 @@
 package com.example.demo;
 
 import io.vertx.core.json.JsonObject;
+import no.finn.unleash.DefaultUnleash;
+import no.finn.unleash.Unleash;
+import no.finn.unleash.util.UnleashConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,5 +61,22 @@ public class GreeterController {
     @GetMapping("/healthz")
     public String health() {
         return "OK";
+    }
+
+    @GetMapping("/Awesomefeature")
+    public String awesomeFeature(){
+        UnleashConfig config = UnleashConfig.builder()
+                .appName("java-test")
+                .instanceId("instance x")
+                .unleashAPI("http://unleash.herokuapp.com/api/")
+                .build();
+        Unleash unleash = new DefaultUnleash(config);
+        if(unleash.isEnabled("AwesomeFeature")) {
+            //do some magic
+            return "This is an awesome feature!";
+        } else {
+            //do old boring stuff
+            return "Nothing to see here, feature not complete";
+        }
     }
 }

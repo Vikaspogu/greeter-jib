@@ -1,7 +1,0 @@
-=  SpringBoot Greeter using Jib
-
-What is Jib?: Jib builds optimized Docker and OCI images for your Java applications without a Docker daemon - and without deep mastery of Docker best-practices. It is available as plugins for Maven and Gradle and as a Java library
-
-The Greeter application  based on SpringBoot, that can be deployed as Knative service.
-
-Please check the https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/0.4.0/05-build/build.html[Knative Tutorial] on how to build and deploy the application
