@@ -1,10 +1,10 @@
 #  SpringBoot Greeter
 
-The Greeter application is based on SpringBoot, build using Jib plugin
+The Greeter application is based on SpringBoot, can be build either using Jib plugin or spring-boot maven
 
-What is Jib?: Build Java applications without a Docker daemon
+What is Jib?: Building Java applications without a Docker daemon
 
-### How to build docker image without docker using Jib
+How to build docker image without docker using Jib
 
 ```bash
 mvn compile jib:build
