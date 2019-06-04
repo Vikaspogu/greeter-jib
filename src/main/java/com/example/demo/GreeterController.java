@@ -1,9 +1,6 @@
 package com.example.demo;
 
 import io.vertx.core.json.JsonObject;
-import no.finn.unleash.DefaultUnleash;
-import no.finn.unleash.Unleash;
-import no.finn.unleash.util.UnleashConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +22,7 @@ public class GreeterController {
     private final SimpleDateFormat SDF = new SimpleDateFormat("HH:mm:ss");
 
     private static final String HOSTNAME =
-        parseContainerIdFromHostname(System.getenv().getOrDefault("HOSTNAME", "unknown"));
+            parseContainerIdFromHostname(System.getenv().getOrDefault("HOSTNAME", "unknown"));
 
     static String parseContainerIdFromHostname(String hostname) {
         return hostname.replaceAll("greeter-v\\d+-", "");
@@ -53,11 +50,11 @@ public class GreeterController {
     public @ResponseBody
     String eventGreet(@RequestBody String cloudEventJson) {
         count++;
-        String greeterHost = String.format(RESPONSE_STRING_FORMAT, ""," Event ", HOSTNAME, count);
+        String greeterHost = String.format(RESPONSE_STRING_FORMAT, "", " Event ", HOSTNAME, count);
         JsonObject response = new JsonObject(cloudEventJson)
-                                  .put("host",greeterHost.replace("\n","").trim())
-                                  .put("time",SDF.format(new Date()));
-        LOGGER.info("Event Message Received \n {}",response.encodePrettily());
+                .put("host", greeterHost.replace("\n", "").trim())
+                .put("time", SDF.format(new Date()));
+        LOGGER.info("Event Message Received \n {}", response.encodePrettily());
         return response.encode();
     }
 
@@ -66,20 +63,4 @@ public class GreeterController {
         return "OK";
     }
 
-    @GetMapping("/awesomefeature")
-    public String awesomeFeature(){
-        UnleashConfig config = UnleashConfig.builder()
-                .appName(appName)
-                .instanceId(appName+"-instance")
-                .unleashAPI("http://unleash-server:4242/api/")
-                .build();
-        Unleash unleash = new DefaultUnleash(config);
-        if(unleash.isEnabled("AwesomeFeature")) {
-            //do some magic
-            return "This is an awesome feature!";
-        } else {
-            //do old boring stuff
-            return "Nothing to see here, feature not complete";
-        }
-    }
 }

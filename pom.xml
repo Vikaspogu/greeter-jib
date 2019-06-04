@@ -46,12 +46,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/no.finn.unleash/unleash-client-java -->
-        <dependency>
-            <groupId>no.finn.unleash</groupId>
-            <artifactId>unleash-client-java</artifactId>
-            <version>3.2.6</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/io.opentracing.contrib/opentracing-spring-web-starter -->
         <dependency>
             <groupId>io.opentracing.contrib</groupId>

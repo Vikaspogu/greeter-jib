@@ -54,15 +54,15 @@ public class GreeterControllerTest {
         Assert.assertEquals("OK", result.getBody());
     }
 
-    @Test
-    public void awesomeFeatureEndpointTest() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:" + randomServerPort + "/awesomefeature";
-        URI uri = new URI(baseUrl);
-        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-        //Verify request succeed
-        Assert.assertEquals(200, result.getStatusCodeValue());
-        Assert.assertEquals("Nothing to see here, feature not complete", result.getBody());
-    }
+//    @Test
+//    public void awesomeFeatureEndpointTest() throws URISyntaxException {
+//        RestTemplate restTemplate = new RestTemplate();
+//        final String baseUrl = "http://localhost:" + randomServerPort + "/awesomefeature";
+//        URI uri = new URI(baseUrl);
+//        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+//        //Verify request succeed
+//        Assert.assertEquals(200, result.getStatusCodeValue());
+//        Assert.assertEquals("Nothing to see here, feature not complete", result.getBody());
+//    }
 
 }
