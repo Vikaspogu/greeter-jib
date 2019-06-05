@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import java.util.Date;
  * GreeterController
  */
 @RestController
+@RequestMapping("/greeter")
 public class GreeterController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GreeterController.class);

@@ -25,7 +25,7 @@ public class GreeterControllerTest {
     @Test
     public void greetEndpointTest() throws URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:" + randomServerPort + "/";
+        final String baseUrl = "http://localhost:" + randomServerPort + "/greeter/";
         URI uri = new URI(baseUrl);
         ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
         //Verify request succeed
@@ -36,7 +36,7 @@ public class GreeterControllerTest {
     @Test
     public void eventGreetEndpointTest() throws URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:" + randomServerPort + "/";
+        final String baseUrl = "http://localhost:" + randomServerPort + "/greeter/";
         URI uri = new URI(baseUrl);
         JsonObject json = new JsonObject();
         json.addProperty("name", "test-name");
@@ -46,7 +46,7 @@ public class GreeterControllerTest {
     @Test
     public void healthEndpointTest() throws URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:" + randomServerPort + "/healthz";
+        final String baseUrl = "http://localhost:" + randomServerPort + "/greeter/healthz";
         URI uri = new URI(baseUrl);
         ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
         //Verify request succeed
