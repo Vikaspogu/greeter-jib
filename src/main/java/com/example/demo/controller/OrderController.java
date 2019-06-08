@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 public class OrderController {
 
@@ -45,7 +47,8 @@ public class OrderController {
     @PostMapping("/submit")
     public String submit(@ModelAttribute Order order) {
         for (long i = 0; i < order.getQuantity(); i++) {
-//            String id = UUID.randomUUID().toString();
+            String id = UUID.randomUUID().toString();
+            order.setId(id);
             queueService.sendMessage(queueName, order);
         }
         return "success";
