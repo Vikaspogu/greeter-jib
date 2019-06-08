@@ -10,6 +10,10 @@ function () {
 }, 1000);
 
 
+
+
+
+
 </script>
 <div layout:fragment="content">
     <div class="store" th:if="${isStoreEnabled}">
@@ -18,20 +22,23 @@ function () {
             <p class="sans-serif lh-copy measure">You can buy items.</p>
         </div>
         <div class="pv4">
-            <form th:action="@{/submit}" th:object="${ticket}" method="post">
+            <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="1">
+                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 1 item
                 </button>
             </form>
-            <form th:action="@{/submit}" th:object="${ticket}" method="post">
+            <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="10">
+                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 10 items
                 </button>
             </form>
-            <form th:action="@{/submit}" th:object="${ticket}" method="post">
+            <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="100">
+                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 100 items
                 </button>

@@ -1,24 +1,28 @@
 package com.example.demo.jms;
 
-import org.apache.activemq.command.ActiveMQTextMessage;
+import com.example.demo.model.Order;
+import com.example.demo.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
 import java.util.Collections;
 
 @Component
-public class QueueService implements MessageListener {
+public class QueueService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QueueService.class);
 
     @Autowired
     private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
     private int counter = 0;
 
     public int completedJobs() {
@@ -29,9 +33,9 @@ public class QueueService implements MessageListener {
         return jmsTemplate.browse(queue, (s, qb) -> Collections.list(qb.getEnumeration()).size());
     }
 
-    public void sendMessage(String destination, String message) {
-        LOGGER.info("sending message='{}' to destination='{}'", message, destination);
-        jmsTemplate.convertAndSend(destination, message);
+    public void sendMessage(String destination, Order order) {
+        LOGGER.info("sending message='{}' to destination='{}'", order.getProductName(), destination);
+        jmsTemplate.convertAndSend(destination, order);
     }
 
     public boolean isUp() {
@@ -47,20 +51,16 @@ public class QueueService implements MessageListener {
         return false;
     }
 
-    @Override
-    public void onMessage(Message message) {
-        if (message instanceof ActiveMQTextMessage) {
-            ActiveMQTextMessage textMessage = (ActiveMQTextMessage) message;
-            try {
-                LOGGER.info("Processing task " + textMessage.getText());
-                Thread.sleep(5000);
-                LOGGER.info("Completed task " + textMessage.getText());
-            } catch (InterruptedException | JMSException e) {
-                e.printStackTrace();
-            }
-            counter++;
-        } else {
-            LOGGER.error("Message is not a text message " + message.toString());
+    @JmsListener(destination = "mainQueue")
+    public void onMessage(Order order) {
+        try {
+            LOGGER.info("Processing task " + order.getProductName());
+            orderRepository.save(order);
+            Thread.sleep(5000);
+            LOGGER.info("Completed task " + order.getProductName());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        counter++;
     }
 }

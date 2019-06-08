@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.jms.QueueService;
-import com.example.demo.model.Ticket;
+import com.example.demo.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -10,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @Controller
-public class TicketController {
+public class OrderController {
 
     @Autowired
     private QueueService queueService;
@@ -33,7 +31,7 @@ public class TicketController {
     @GetMapping("/")
     public String home(Model model) {
         int pendingMessages = queueService.pendingJobs(queueName);
-        model.addAttribute("order", new Ticket());
+        model.addAttribute("order", new Order());
         model.addAttribute("pendingJobs", pendingMessages);
         model.addAttribute("completedJobs", queueService.completedJobs());
         model.addAttribute("isConnected", queueService.isUp() ? "yes" : "no");
@@ -45,10 +43,10 @@ public class TicketController {
     }
 
     @PostMapping("/submit")
-    public String submit(@ModelAttribute Ticket ticket) {
-        for (long i = 0; i < ticket.getQuantity(); i++) {
-            String id = UUID.randomUUID().toString();
-            queueService.sendMessage(queueName, id);
+    public String submit(@ModelAttribute Order order) {
+        for (long i = 0; i < order.getQuantity(); i++) {
+//            String id = UUID.randomUUID().toString();
+            queueService.sendMessage(queueName, order);
         }
         return "success";
     }
