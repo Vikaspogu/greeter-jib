@@ -4,17 +4,16 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
 
-    @org.springframework.data.annotation.Id
-    private String id;
+    private String orderId;
     private long quantity;
     private String productName;
 
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getProductName() {
@@ -36,7 +35,7 @@ public class Order implements Serializable {
     @Override
     public String toString() {
         return "Order{" +
-                "Id=" + id +
+                "Id=" + orderId +
                 ", quantity=" + quantity +
                 ", productName='" + productName + '\'' +
                 '}';

@@ -48,7 +48,7 @@ public class OrderController {
     public String submit(@ModelAttribute Order order) {
         for (long i = 0; i < order.getQuantity(); i++) {
             String id = UUID.randomUUID().toString();
-            order.setId(id);
+            order.setOrderId(id);
             queueService.sendMessage(queueName, order);
         }
         return "success";

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import javax.jms.ConnectionFactory;
@@ -52,7 +53,7 @@ public class QueueService {
     }
 
     @JmsListener(destination = "mainQueue")
-    public void onMessage(Order order) {
+    public void onMessage(@Payload Order order) {
         try {
             LOGGER.info("Processing task " + order.getProductName());
             orderRepository.save(order);
