@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 
     @org.springframework.data.annotation.Id
     private String id;
