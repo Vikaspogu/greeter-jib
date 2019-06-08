@@ -1,20 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="layout.html">
-<script type="text/javascript"
-        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript">
-var auto_refresh = setInterval(
-function () {
-    $('#result').load('#result');
-}, 1000);
-
-
-
-
-
-
-</script>
 <div layout:fragment="content">
     <div class="store" th:if="${isStoreEnabled}">
         <h1 class="f1">Store</h1>
@@ -24,21 +10,21 @@ function () {
         <div class="pv4">
             <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="1">
-                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
+                <input type="hidden" name="productName" th:value="Pixel3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 1 item
                 </button>
             </form>
             <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="10">
-                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
+                <input type="hidden" name="productName" th:value="Pixel3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 10 items
                 </button>
             </form>
             <form th:action="@{/submit}" th:object="${order}" method="post">
                 <input type="hidden" name="quantity" th:value="100">
-                <input type="hidden" name="productName" th:value="Google Pixel 3XL">
+                <input type="hidden" name="productName" th:value="Pixel3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
                     Buy 100 items
                 </button>
