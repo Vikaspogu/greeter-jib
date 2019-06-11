@@ -1,6 +1,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="layout.html">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Greeter!</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 <div layout:fragment="content">
     <div class="store" th:if="${isStoreEnabled}">
         <h1 class="f1">Store</h1>
@@ -9,19 +28,23 @@
         </div>
         <div class="pv4">
             <form th:action="@{/submit}" th:object="${order}" method="post">
-                <select th:field="*{quantity}"
-                        class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
-                    <option th:value="1" th:text="1"></option>
-                    <option th:value="10" th:text="10"></option>
-                    <option th:value="100" th:text="100"></option>
-                </select>
-                <select th:field="*{productName}"
-                        class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
-                    <option th:value="'Pixel3XL'" th:text="Pixel3XL"></option>
-                    <option th:value="'Headphone'" th:text="Headphone"></option>
-                    <option th:value="'TV'" th:text="TV"></option>
-                </select>
-                <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
+                <div class="form-group">
+                    <label for="quantity">Select Quantity</label>
+                    <select th:field="*{quantity}" id="quantity">
+                        <option th:value="1" th:text="1"></option>
+                        <option th:value="10" th:text="10"></option>
+                        <option th:value="100" th:text="100"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectProduct">Select Product</label>
+                    <select th:field="*{productName}" id="selectProduct">
+                        <option th:value="'Pixel3XL'" th:text="Pixel3XL"></option>
+                        <option th:value="'Headphone'" th:text="Headphone"></option>
+                        <option th:value="'TV'" th:text="TV"></option>
+                    </select>
+                </div>
+                <button class="btn btn-dark">
                     Submit
                 </button>
             </form>
@@ -32,6 +55,27 @@
                     Buy 100 items
                 </button>
             </form>-->
+            <div class="pv4">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"> Order Id</th>
+                        <th scope="col"> Product Name</th>
+                        <th scope="col"> Purchase Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr scope="row" th:if="${orders.empty}">
+                        <td colspan="2"> No Orders Available</td>
+                    </tr>
+                    <tr scope="row" th:each="order : ${orders}">
+                        <td><span th:text="${order.orderId}"> Order Id </span></td>
+                        <td><span th:text="${order.productName}"> Product Name </span></td>
+                        <td><span th:text="${order.timestamp}"> Purchase Date </span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="worker" th:if="${isWorkerEnabled}">
@@ -61,4 +105,5 @@
         </div>
     </div>
 </div>
+</body>
 </html>

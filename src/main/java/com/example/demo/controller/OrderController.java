@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.jms.QueueService;
 import com.example.demo.model.Order;
+import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class OrderController {
 
     @Autowired
     private QueueService queueService;
+
+    @Autowired
+    private OrderRepository repository;
 
     @Value("${queue.name}")
     private String queueName;
@@ -42,6 +47,7 @@ public class OrderController {
         model.addAttribute("workerName", this.workerName);
         model.addAttribute("isStoreEnabled", this.storeEnabled);
         model.addAttribute("isWorkerEnabled", this.workerEnabled);
+        model.addAttribute("orders", repository.findAll(new Sort(Sort.Direction.DESC, "timestamp")));
         return "home";
     }
 
