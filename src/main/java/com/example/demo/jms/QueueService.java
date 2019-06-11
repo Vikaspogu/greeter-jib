@@ -53,7 +53,7 @@ public class QueueService {
     }
 
     @JmsListener(destination = "mainQueue")
-    public void onMessage(@Payload Order order) {
+    public void receiveMessage(@Payload Order order) {
         try {
             LOGGER.info("Processing task " + order.getProductName());
             orderRepository.save(order);
