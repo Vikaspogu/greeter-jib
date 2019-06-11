@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.connection.CachingConnectionFactory;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
@@ -35,11 +33,10 @@ public class ActiveMQConfig {
                                                     DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         // This provides all boot's default to this factory, including the message converter
-        configurer.configure(factory, connectionFactory);
-        // You could still override some of Boot's default if necessary.
         factory.setConnectionFactory(activeMQConnectionFactory());
         factory.setConcurrency("1");
         factory.setMessageConverter(jacksonJmsMessageConverter());
+        configurer.configure(factory, connectionFactory);
         return factory;
     }
 
@@ -49,16 +46,6 @@ public class ActiveMQConfig {
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");
         return converter;
-    }
-
-    @Bean
-    public CachingConnectionFactory cachingConnectionFactory() {
-        return new CachingConnectionFactory(activeMQConnectionFactory());
-    }
-
-    @Bean
-    public JmsTemplate jmsTemplate() {
-        return new JmsTemplate(cachingConnectionFactory());
     }
 
     @Bean
