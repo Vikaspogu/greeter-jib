@@ -19,6 +19,14 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    public Order(String id, String orderNumber, long quantity, String productName, Date timestamp) {
+        this.id = id;
+        this.orderNumber = orderNumber;
+        this.quantity = quantity;
+        this.productName = productName;
+        this.timestamp = timestamp;
+    }
+
     public String getId() {
         return id;
     }
