@@ -63,8 +63,8 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 "Id=" + id +
-                "orderNumber=" + orderNumber +
-                ", quantity=" + quantity +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", quantity='" + quantity + '\'' +
                 ", productName='" + productName + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
