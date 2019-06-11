@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -46,9 +47,10 @@ public class OrderController {
 
     @PostMapping("/submit")
     public String submit(@ModelAttribute Order order) {
+        String id = UUID.randomUUID().toString();
         for (long i = 0; i < order.getQuantity(); i++) {
-            String id = UUID.randomUUID().toString();
             order.setOrderId(id);
+            order.setTimestamp(new Date());
             queueService.sendMessage(queueName, order);
         }
         return "success";
