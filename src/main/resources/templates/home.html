@@ -3,6 +3,7 @@
       layout:decorate="layout.html">
 <head>
     <!-- Required meta tags -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -32,8 +33,8 @@
                     <label for="quantity">Select Quantity</label>
                     <select th:field="*{quantity}" id="quantity">
                         <option th:value="1" th:text="1"></option>
+                        <option th:value="5" th:text="5"></option>
                         <option th:value="10" th:text="10"></option>
-                        <option th:value="100" th:text="100"></option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -55,7 +56,7 @@
                     Buy 100 items
                 </button>
             </form>-->
-            <div class="pv4">
+            <div class="pv4 table-wrapper-scroll-y my-custom-scrollbar">
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
@@ -69,7 +70,7 @@
                         <td colspan="2"> No Orders Available</td>
                     </tr>
                     <tr scope="row" th:each="order : ${orders}">
-                        <td><span th:text="${order.orderId}"> Order Id </span></td>
+                        <td><span th:text="${order.orderNumber}"> Order Id </span></td>
                         <td><span th:text="${order.productName}"> Product Name </span></td>
                         <td><span th:text="${order.timestamp}"> Purchase Date </span></td>
                     </tr>

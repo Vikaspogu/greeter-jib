@@ -10,7 +10,8 @@ import java.util.Date;
 public class Order implements Serializable {
 
     @Id
-    private String orderId;
+    private String id;
+    private String orderNumber;
     private long quantity;
     private String productName;
     private Date timestamp;
@@ -18,12 +19,20 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return id;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public String getProductName() {
@@ -53,7 +62,8 @@ public class Order implements Serializable {
     @Override
     public String toString() {
         return "Order{" +
-                "Id=" + orderId +
+                "Id=" + id +
+                "orderNumber=" + orderNumber +
                 ", quantity=" + quantity +
                 ", productName='" + productName + '\'' +
                 ", timestamp='" + timestamp + '\'' +
