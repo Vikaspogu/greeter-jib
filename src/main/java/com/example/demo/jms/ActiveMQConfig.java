@@ -32,7 +32,6 @@ public class ActiveMQConfig {
     public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory,
                                                     DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        // This provides all boot's default to this factory, including the message converter
         factory.setConnectionFactory(activeMQConnectionFactory());
         factory.setConcurrency("1");
         factory.setMessageConverter(jacksonJmsMessageConverter());

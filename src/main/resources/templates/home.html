@@ -9,6 +9,16 @@
         </div>
         <div class="pv4">
             <form th:action="@{/submit}" th:object="${order}" method="post">
+                <select th:field="*{quantity}">
+                    <option th:value="1" th:text="1"></option>
+                    <option th:value="10" th:text="10"></option>
+                    <option th:value="100" th:text="100"></option>
+                </select>
+                <select th:field="*{productName}">
+                    <option th:value="'Pixel3XL'" th:text="Pixel3XL"></option>
+                    <option th:value="'Headphone'" th:text="Headphone"></option>
+                    <option th:value="'TV'" th:text="TV"></option>
+                </select>
                 <input type="hidden" name="quantity" th:value="1">
                 <input type="hidden" name="productName" th:value="Pixel3XL">
                 <button class="f4 link br1 ba bw2 ph3 pv2 mb2 dib near-black b--near-black b hover-bg-near-black hover-white">
