@@ -11,7 +11,6 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.MessageType;
 
 @Configuration
 public class JmsConfig {
@@ -32,7 +31,7 @@ public class JmsConfig {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(activeMQConnectionFactory());
         factory.setConcurrency("1");
-        factory.setMessageConverter(jacksonJmsMessageConverter());
+        factory.setMessageConverter(messageConverter());
         return factory;
     }
 
@@ -52,11 +51,14 @@ public class JmsConfig {
     }
 
     @Bean // Serialize message content to json using TextMessage
-    public MessageConverter jacksonJmsMessageConverter() {
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-        converter.setTargetType(MessageType.TEXT);
-        converter.setTypeIdPropertyName("_type");
-        return converter;
+    public MessageConverter messageConverter() {
+        return new MappingJackson2MessageConverter();
     }
+//    public MessageConverter jacksonJmsMessageConverter() {
+//        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+//        converter.setTargetType(MessageType.TEXT);
+//        converter.setTypeIdPropertyName("_type");
+//        return converter;
+//    }
 
 }
