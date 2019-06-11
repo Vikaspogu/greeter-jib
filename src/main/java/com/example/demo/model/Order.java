@@ -1,9 +1,14 @@
 package com.example.demo.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
+@Document(collection = "order")
 public class Order implements Serializable {
 
+    @Id
     private String orderId;
     private long quantity;
     private String productName;
