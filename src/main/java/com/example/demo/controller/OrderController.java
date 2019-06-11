@@ -49,7 +49,7 @@ public class OrderController {
         for (long i = 0; i < order.getQuantity(); i++) {
             String id = UUID.randomUUID().toString();
             order.setOrderId(id);
-            queueService.sendMessage(queueName, new Order(order.getOrderId(), order.getQuantity(), order.getProductName()));
+            queueService.sendMessage(queueName, order);
         }
         return "success";
     }
