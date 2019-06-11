@@ -52,7 +52,7 @@ public class QueueService {
         return false;
     }
 
-    @JmsListener(destination = "mainQueue")
+    @JmsListener(destination = "mainQueue", containerFactory = "jmsListenerContainerFactory")
     public void receiveMessage(@Payload Order order) {
         try {
             LOGGER.info("Processing task " + order.getProductName());

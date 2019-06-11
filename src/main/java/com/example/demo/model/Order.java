@@ -8,6 +8,15 @@ public class Order implements Serializable {
     private long quantity;
     private String productName;
 
+    public Order() {
+    }
+
+    public Order(String orderId, long quantity, String productName) {
+        this.orderId = orderId;
+        this.quantity = quantity;
+        this.productName = productName;
+    }
+
     public String getOrderId() {
         return orderId;
     }
